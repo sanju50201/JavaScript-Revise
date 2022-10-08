@@ -1,12 +1,15 @@
 'use strict'; // activates strict mode --> which helps us to write secure code
-// Values and Variables
+// Values and let
+iables
 
-let number = 7; // declaring a number to a variable
+let number = 7; // declaring a number to a let
+iable
 console.log(number); // printing out the number to the console
 
 let firstName = 'Sanjith';
 let lastName = 'Kumar';
-console.log(firstName + ' ' + lastName); // concatenating the two variables which is a string
+console.log(firstName + ' ' + lastName); // concatenating the two let
+iables which is a string
 
 let isAttending = true;
 console.log(isAttending); // this is a boolean value
@@ -22,19 +25,25 @@ console.log(finalPoint); // undefined data type
 
 // const let = "JavaScript" // invalid
 
-// Preferred way to name variables
+// Preferred way to name let
+iables
 let selectedMajor = 'Automobile';
 let interestedMajor = 'Computer Science';
 
-// not Preferred to name variables this manner
+// not Preferred to name let
+iables this manner
 let major1 = 'Automobile';
 let major2 = 'Computer Science';
 
 /**
- * Rules to follow while naming a variable
- * the variable is recommended to be declared using camelCase
- * the variables should'nt start using numbers, special characters except $ ,_
- * you cannot declare a variable with a reserved keywords
+ * Rules to follow while naming a let
+iable
+ * the let
+iable is recommended to be declared using camelCase
+ * the let
+iables should'nt start using numbers, special characters except $ ,_
+ * you cannot declare a let
+iable with a reserved keywords
  * example : const const = "Hello" --> invalid
  */
 
@@ -62,8 +71,10 @@ console.log(continent);
 
 /**
  * JavaScript has dynamic typing, which means that we do not have to manually define the data type
- * of the value stored in a variable, JavaScript automatically determines the data type
- * the value has the type not the variable we declare
+ * of the value stored in a let
+iable, JavaScript automatically determines the data type
+ * the value has the type not the let
+iable we declare
  * the below code is an example
  */
 
@@ -71,7 +82,8 @@ let x = 35;
 x = 'Bengaluru'; // Dynamic typing
 console.log(x);
 
-// the below code does'nt work because the variable should
+// the below code does'nt work because the let
+iable should
 // be declared first then should be accessed, now the code is out of reach
 // console.log(isJavaScriptFun)
 // let isJavaScriptFun = true
@@ -93,36 +105,48 @@ console.log(typeof language);
 console.log(typeof populationIndia);
 console.log(typeof country);
 
-// var let and const
+// let
+ let and const
 
-// usage of var is not recommended in modern JavaScript
+// usage of let
+ is not recommended in modern JavaScript
 
-// DON'T USE VAR!!!
-var data = true;
-data = false; // var allows us to change the value even after declaration
+// DON'T USE let
+!!!
+let
+ data = true;
+data = false; // let
+ allows us to change the value even after declaration
 console.log(data); //
 /*
-it is recommended to use let when the value of it varies
-let allows us to declare an empty variable
+it is recommended to use let when the value of it let
+ies
+let allows us to declare an empty let
+iable
 use let when you need to change the value after a period of time
 */
 let name2 = 'Sanju';
-name2 = 'Kumar'; // let allows us to change the name of the variable
+name2 = 'Kumar'; // let allows us to change the name of the let
+iable
 console.log(name2);
 /*
-it is recommended to use const when the value doesn't change or vary
-in the const we cannot declare an empty variable
+it is recommended to use const when the value doesn't change or let
+y
+in the const we cannot declare an empty let
+iable
 const text; --> this will throw an error
 */
 const name1 = 'Punith';
 // name1 = "Kumar" // you cannot change the value when it is declared using a const
 console.log(name1);
 
-// We can declare a variable without using let or const
+// We can declare a let
+iable without using let or const
 
 lastName = 'Kumar';
 console.log(lastName);
-// but this will not create a variable in the local scope, instead creates
+// but this will not create a let
+iable in the local scope, instead creates
 // it in a global scope, hence not recommended to do this.
 
 // Assignment 3
@@ -581,9 +605,11 @@ function recursiveFunc(n) {
 }
 console.log(recursiveFunc(1));
 
-// Variables declared inside a function cannot be accessed outside, this is called a scope
+// let
+iables declared inside a function cannot be accessed outside, this is called a scope
 
-// here the variables are declared in the global scope
+// here the let
+iables are declared in the global scope
 const nameP = 'Sanju';
 const digit = 12;
 const digit1 = 10;
@@ -604,7 +630,8 @@ function getScore() {
 }
 console.log(getScore());
 
-// console.log(numInTheFunc1); --> you cannot access this way, since the variable is not globally scoped and is valid only within the function
+// console.log(numInTheFunc1); --> you cannot access this way, since the let
+iable is not globally scoped and is valid only within the function
 
 const revereNumber = n => {
   n = n + '';

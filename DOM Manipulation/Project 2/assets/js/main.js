@@ -1,14 +1,14 @@
 'use strict';
 $(document).ready(function () {
-  var lat;
-  var long;
+  let lat;
+  let long;
 
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function (position) {
       lat = position.coords.latitude;
       long = position.coords.longitude;
 
-      var api =
+      let api =
         'https://fcc-weather-api.glitch.me/api/current?lat=' +
         lat +
         '&lon=' +
@@ -16,10 +16,10 @@ $(document).ready(function () {
         '';
 
       $.getJSON(api, function (res) {
-        var celsius = res.main.temp;
-        var farenheit = celsius * 1.8 + 32;
+        let celsius = res.main.temp;
+        let farenheit = celsius * 1.8 + 32;
 
-        var location = res.name;
+        let location = res.name;
 
         $('.weather-location').html(location);
         $('.temp').html(Math.floor(celsius));
@@ -36,7 +36,7 @@ $(document).ready(function () {
         });
 
         //SETTING UP THE ICON
-        var icons = new Skycons({
+        let icons = new Skycons({
           color: 'white',
         });
 

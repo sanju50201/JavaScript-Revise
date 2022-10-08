@@ -3,10 +3,10 @@
 
   /* Set up a RequestAnimationFrame shim so we can animate efficiently FOR
    * GREAT JUSTICE. */
-  var requestInterval, cancelInterval;
+  let requestInterval, cancelInterval;
 
   (function () {
-    var raf =
+    let raf =
         global.requestAnimationFrame ||
         global.webkitRequestAnimationFrame ||
         global.mozRequestAnimationFrame ||
@@ -21,7 +21,7 @@
 
     if (raf && caf) {
       requestInterval = function (fn) {
-        var handle = { value: null };
+        let handle = { value: null };
 
         function loop() {
           handle.value = raf(loop);
@@ -44,7 +44,8 @@
   /* Catmull-rom spline stuffs. */
   /*
     function upsample(n, spline) {
-      var polyline = [],
+      let
+ polyline = [],
           len = spline.length,
           bx  = spline[0],
           by  = spline[1],
@@ -85,7 +86,8 @@
       return polyline;
     }
     function downsample(n, polyline) {
-      var len = 0,
+      let
+ len = 0,
           i, dx, dy;
       for(i = 2; i !== polyline.length; i += 2) {
         dx = polyline[i    ] - polyline[i - 2];
@@ -93,7 +95,8 @@
         len += Math.sqrt(dx * dx + dy * dy);
       }
       len /= n;
-      var small = [],
+      let
+ small = [],
           target = len,
           min = 0,
           max, t;
@@ -120,7 +123,7 @@
   /* Define skycon things. */
   /* FIXME: I'm *really really* sorry that this code is so gross. Really, I am.
    * I'll try to clean it up eventually! Promise! */
-  var KEYFRAME = 500,
+  let KEYFRAME = 500,
     STROKE = 0.08,
     TAU = 2.0 * Math.PI,
     TWO_OVER_SQRT_2 = 2.0 / Math.sqrt(2);
@@ -139,7 +142,7 @@
   }
 
   function puff(ctx, t, cx, cy, rx, ry, rmin, rmax) {
-    var c = Math.cos(t * TAU),
+    let c = Math.cos(t * TAU),
       s = Math.sin(t * TAU);
 
     rmax -= rmin;
@@ -153,7 +156,7 @@
   }
 
   function puffs(ctx, t, cx, cy, rx, ry, rmin, rmax) {
-    var i;
+    let i;
 
     for (i = 5; i--; ) puff(ctx, t + i / 5, cx, cy, rx, ry, rmin, rmax);
   }
@@ -161,7 +164,7 @@
   function cloud(ctx, t, cx, cy, cw, s, color) {
     t /= 30000;
 
-    var a = cw * 0.21,
+    let a = cw * 0.21,
       b = cw * 0.12,
       c = cw * 0.24,
       d = cw * 0.28;
@@ -177,7 +180,7 @@
   function sun(ctx, t, cx, cy, cw, s, color) {
     t /= 120000;
 
-    var a = cw * 0.25 - s * 0.5,
+    let a = cw * 0.25 - s * 0.5,
       b = cw * 0.32 + s * 0.5,
       c = cw * 0.5 - s * 0.5,
       i,
@@ -205,7 +208,7 @@
   function moon(ctx, t, cx, cy, cw, s, color) {
     t /= 15000;
 
-    var a = cw * 0.29 - s * 0.5,
+    let a = cw * 0.29 - s * 0.5,
       b = cw * 0.05,
       c = Math.cos(t * TAU),
       p = (c * TAU) / -16;
@@ -234,7 +237,7 @@
   function rain(ctx, t, cx, cy, cw, s, color) {
     t /= 1350;
 
-    var a = cw * 0.16,
+    let a = cw * 0.16,
       b = (TAU * 11) / 12,
       c = (TAU * 7) / 12,
       i,
@@ -258,7 +261,7 @@
   function sleet(ctx, t, cx, cy, cw, s, color) {
     t /= 750;
 
-    var a = cw * 0.1875,
+    let a = cw * 0.1875,
       i,
       p,
       x,
@@ -282,7 +285,7 @@
   function snow(ctx, t, cx, cy, cw, s, color) {
     t /= 3000;
 
-    var a = cw * 0.16,
+    let a = cw * 0.16,
       b = s * 0.75,
       u = t * TAU * 0.7,
       ux = Math.cos(u) * b,
@@ -317,7 +320,7 @@
   function fogbank(ctx, t, cx, cy, cw, s, color) {
     t /= 30000;
 
-    var a = cw * 0.21,
+    let a = cw * 0.21,
       b = cw * 0.06,
       c = cw * 0.21,
       d = cw * 0.28;
@@ -331,7 +334,8 @@
   }
 
   /*
-    var WIND_PATHS = [
+    let
+ WIND_PATHS = [
           downsample(63, upsample(8, [
             -1.00, -0.28,
             -0.75, -0.18,
@@ -362,7 +366,7 @@
         ];
     */
 
-  var WIND_PATHS = [
+  let WIND_PATHS = [
       [
         -0.75,
         -0.18,
@@ -566,7 +570,7 @@
     ];
 
   function leaf(ctx, t, x, y, cw, s, color) {
-    var a = cw / 8,
+    let a = cw / 8,
       b = a / 3,
       c = 2 * b,
       d = (t % 1) * TAU,
@@ -592,7 +596,7 @@
   function swoosh(ctx, t, cx, cy, cw, s, index, total, color) {
     t /= 2500;
 
-    var path = WIND_PATHS[index],
+    let path = WIND_PATHS[index],
       a = (t + index - WIND_OFFSETS[index].start) % total,
       c = (t + index - WIND_OFFSETS[index].end) % total,
       e = (t + index) % total,
@@ -680,7 +684,7 @@
     }
   }
 
-  var Skycons = function (opts) {
+  let Skycons = function (opts) {
     this.list = [];
     this.interval = null;
     this.color = opts && opts.color ? opts.color : 'black';
@@ -688,7 +692,7 @@
   };
 
   Skycons.CLEAR_DAY = function (ctx, t, color) {
-    var w = ctx.canvas.width,
+    let w = ctx.canvas.width,
       h = ctx.canvas.height,
       s = Math.min(w, h);
 
@@ -696,7 +700,7 @@
   };
 
   Skycons.CLEAR_NIGHT = function (ctx, t, color) {
-    var w = ctx.canvas.width,
+    let w = ctx.canvas.width,
       h = ctx.canvas.height,
       s = Math.min(w, h);
 
@@ -704,7 +708,7 @@
   };
 
   Skycons.PARTLY_CLOUDY_DAY = function (ctx, t, color) {
-    var w = ctx.canvas.width,
+    let w = ctx.canvas.width,
       h = ctx.canvas.height,
       s = Math.min(w, h);
 
@@ -713,7 +717,7 @@
   };
 
   Skycons.PARTLY_CLOUDY_NIGHT = function (ctx, t, color) {
-    var w = ctx.canvas.width,
+    let w = ctx.canvas.width,
       h = ctx.canvas.height,
       s = Math.min(w, h);
 
@@ -722,7 +726,7 @@
   };
 
   Skycons.CLOUDY = function (ctx, t, color) {
-    var w = ctx.canvas.width,
+    let w = ctx.canvas.width,
       h = ctx.canvas.height,
       s = Math.min(w, h);
 
@@ -730,7 +734,7 @@
   };
 
   Skycons.RAIN = function (ctx, t, color) {
-    var w = ctx.canvas.width,
+    let w = ctx.canvas.width,
       h = ctx.canvas.height,
       s = Math.min(w, h);
 
@@ -739,7 +743,7 @@
   };
 
   Skycons.SLEET = function (ctx, t, color) {
-    var w = ctx.canvas.width,
+    let w = ctx.canvas.width,
       h = ctx.canvas.height,
       s = Math.min(w, h);
 
@@ -748,7 +752,7 @@
   };
 
   Skycons.SNOW = function (ctx, t, color) {
-    var w = ctx.canvas.width,
+    let w = ctx.canvas.width,
       h = ctx.canvas.height,
       s = Math.min(w, h);
 
@@ -757,7 +761,7 @@
   };
 
   Skycons.WIND = function (ctx, t, color) {
-    var w = ctx.canvas.width,
+    let w = ctx.canvas.width,
       h = ctx.canvas.height,
       s = Math.min(w, h);
 
@@ -766,7 +770,7 @@
   };
 
   Skycons.FOG = function (ctx, t, color) {
-    var w = ctx.canvas.width,
+    let w = ctx.canvas.width,
       h = ctx.canvas.height,
       s = Math.min(w, h),
       k = s * STROKE;
@@ -775,7 +779,7 @@
 
     t /= 5000;
 
-    var a = Math.cos(t * TAU) * s * 0.02,
+    let a = Math.cos(t * TAU) * s * 0.02,
       b = Math.cos((t + 0.25) * TAU) * s * 0.02,
       c = Math.cos((t + 0.5) * TAU) * s * 0.02,
       d = Math.cos((t + 0.75) * TAU) * s * 0.02,
@@ -800,7 +804,7 @@
       return draw;
     },
     add: function (el, draw) {
-      var obj;
+      let obj;
 
       if (typeof el === 'string') el = document.getElementById(el);
 
@@ -822,7 +826,7 @@
       this.draw(obj, KEYFRAME);
     },
     set: function (el, draw) {
-      var i;
+      let i;
 
       if (typeof el === 'string') el = document.getElementById(el);
 
@@ -836,7 +840,7 @@
       this.add(el, draw);
     },
     remove: function (el) {
-      var i;
+      let i;
 
       if (typeof el === 'string') el = document.getElementById(el);
 
@@ -847,7 +851,7 @@
         }
     },
     draw: function (obj, time) {
-      var canvas = obj.context.canvas;
+      let canvas = obj.context.canvas;
 
       if (this.resizeClear) canvas.width = canvas.width;
       else obj.context.clearRect(0, 0, canvas.width, canvas.height);
@@ -855,11 +859,11 @@
       obj.drawing(obj.context, time, this.color);
     },
     play: function () {
-      var self = this;
+      let self = this;
 
       this.pause();
       this.interval = requestInterval(function () {
-        var now = Date.now(),
+        let now = Date.now(),
           i;
 
         for (i = self.list.length; i--; ) self.draw(self.list[i], now);

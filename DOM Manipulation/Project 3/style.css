@@ -1,0 +1,27 @@
+*{
+    margin: 0px;
+    padding: 0;
+}
+body {
+    background: rgb(21, 202, 175);;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    height:100%;
+    }
+.wrapper {
+    width: 800px;
+    margin: 30px auto;
+    color:white;
+    text-align:center;
+    justify-content: center;
+    display:inline-block;
+    }
+     
+h1{
+    font-size: 50px;
+    color: blueviolet;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    font-size: 2.6em;
+    text-transform: uppercase;
+}
+
