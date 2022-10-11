@@ -1179,3 +1179,94 @@ const singer = {
 // which we means it depends on how we execute the function
 
 const printBio = singer.printBio;
+
+// this keyword in the arrow functions
+
+const slangs = {
+  phrases: ['BRUH', 'DUDE', 'MEH', 'HOMIE', 'DAWG', 'DOOOD', 'SIR'],
+
+  // pick function which will select the phrases randomly
+  pickPhrase() {
+    const { phrases } = this; // destructuring
+    const idx = Math.floor(Math.random() * phrases.length);
+    return phrases[idx];
+  },
+  start() {
+    // since we need a key to reference in the stop function we need to create an ID
+    this.timerId = setInterval(() => {
+      console.log(this.pickPhrase());
+    }, 3000);
+    // setInterval(function () {
+    //   // this is going to throw an error because the this is referring to the window, and setInterval runs the code
+    //   // console.log(this.pickPhrase());
+    // }, 3000);
+
+    // arrow functions comes in handy
+  },
+
+  stop() {
+    clearInterval(this.timerId);
+    console.log("IF THIS WAS USING ALERT, IT WOULD'VE BEEN MORE ANNOYING!!");
+  },
+};
+
+// Applying the this keyword knowledge
+
+// function makeDeck() {
+//   const deck = [];
+//   const suits = ['hearts', 'spades', 'diamonds', 'clubs'];
+//   const cardValues = '2,3,4,5,6,7,8,9,10,J,K,A,Q';
+
+//   for (let values of cardValues.split(',')) {
+//     for (let suit of suits) {
+//       deck.push({ value, suit });
+//     }
+//   }
+//   return deck;
+// }
+
+// function drawCard(deck) {
+//   return deck.pop();
+// }
+
+const myDeck = {
+  deck: [],
+  drawnCards: [],
+  suits: ['hearts', 'diamonds', 'spades', 'clubs'],
+  values: '2,3,4,5,6,7,8,9,10,J,Q,K,A',
+  initializeDeck() {
+    const { suits, values, deck } = this;
+    for (let value of values.split(',')) {
+      for (let suit of suits) {
+        deck.push({
+          value,
+          suit,
+        });
+      }
+    }
+  },
+  drawCard() {
+    const card = this.deck.pop();
+    this.drawnCards.push(card);
+    return card;
+  },
+  drawMultipleCards(numCards) {
+    const cards = [];
+    for (let i = 0; i < numCards; i++) {
+      cards.push(this.drawCard());
+    }
+    return cards;
+  },
+  shuffle() {
+    const { deck } = this;
+    for (let i = deck.length - 1; i < 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [deck[i], deck[j]] = [deck[j], deck[i]];
+    }
+  },
+};
+
+myDeck.initializeDeck();
+myDeck.shuffle();
+const h1 = myDeck.drawMultipleCards(3);
+const h2 = myDeck.drawMultipleCards(3);
