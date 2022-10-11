@@ -1,15 +1,13 @@
 'use strict'; // activates strict mode --> which helps us to write secure code
 // Values and let
-iables
 
 let number = 7; // declaring a number to a let
-iable
+
 console.log(number); // printing out the number to the console
 
 let firstName = 'Sanjith';
-let lastName = 'Kumar';
-console.log(firstName + ' ' + lastName); // concatenating the two let
-iables which is a string
+let lastName1 = 'Kumar';
+console.log(firstName + ' ' + lastName1); // concatenating the two let
 
 let isAttending = true;
 console.log(isAttending); // this is a boolean value
@@ -26,12 +24,11 @@ console.log(finalPoint); // undefined data type
 // const let = "JavaScript" // invalid
 
 // Preferred way to name let
-iables
 let selectedMajor = 'Automobile';
 let interestedMajor = 'Computer Science';
 
 // not Preferred to name let
-iables this manner
+
 let major1 = 'Automobile';
 let major2 = 'Computer Science';
 
@@ -83,7 +80,6 @@ x = 'Bengaluru'; // Dynamic typing
 console.log(x);
 
 // the below code does'nt work because the let
-iable should
 // be declared first then should be accessed, now the code is out of reach
 // console.log(isJavaScriptFun)
 // let isJavaScriptFun = true
@@ -106,18 +102,18 @@ console.log(typeof populationIndia);
 console.log(typeof country);
 
 // let
- let and const
+//  let and const
 
 // usage of let
- is not recommended in modern JavaScript
+//  is not recommended in modern JavaScript
 
 // DON'T USE let
-!!!
-let
- data = true;
-data = false; // let
- allows us to change the value even after declaration
-console.log(data); //
+// !!!
+// let
+// data = true;
+// data = false; // let
+// //  allows us to change the value even after declaration
+// console.log(data); //
 /*
 it is recommended to use let when the value of it let
 ies
@@ -127,7 +123,6 @@ use let when you need to change the value after a period of time
 */
 let name2 = 'Sanju';
 name2 = 'Kumar'; // let allows us to change the name of the let
-iable
 console.log(name2);
 /*
 it is recommended to use const when the value doesn't change or let
@@ -140,13 +135,12 @@ const name1 = 'Punith';
 // name1 = "Kumar" // you cannot change the value when it is declared using a const
 console.log(name1);
 
-// We can declare a let
-iable without using let or const
+// We can declare a let without using let or const
 
-lastName = 'Kumar';
+let lastName = 'Kumar';
 console.log(lastName);
 // but this will not create a let
-iable in the local scope, instead creates
+// iable in the local scope, instead creates
 // it in a global scope, hence not recommended to do this.
 
 // Assignment 3
@@ -606,10 +600,10 @@ function recursiveFunc(n) {
 console.log(recursiveFunc(1));
 
 // let
-iables declared inside a function cannot be accessed outside, this is called a scope
+// iables declared inside a function cannot be accessed outside, this is called a scope
 
 // here the let
-iables are declared in the global scope
+// iables are declared in the global scope
 const nameP = 'Sanju';
 const digit = 12;
 const digit1 = 10;
@@ -631,7 +625,7 @@ function getScore() {
 console.log(getScore());
 
 // console.log(numInTheFunc1); --> you cannot access this way, since the let
-iable is not globally scoped and is valid only within the function
+// iable is not globally scoped and is valid only within the function
 
 const revereNumber = n => {
   n = n + '';
@@ -962,7 +956,7 @@ const measureFahrenheit = () => {
   const measurement = {
     type: 'temp',
     unit: 'Celsius',
-    value: prompt('Degrees Celsius'),
+    // value: prompt('Degrees Celsius'),
   };
   console.log(measurement.value);
   const tempFar = measurement.value + 33.8;
@@ -976,10 +970,212 @@ const measureKelvin = function () {
   const measurement = {
     type: 'temp',
     unit: 'Celsius',
-    value: prompt('Degree Celsius '),
+    // value: prompt('Degree Celsius '),
   };
   const tempFar = Number(measurement.value) + 273; // if number was not present this will result in a bug, which will add like a string
   return tempFar;
 };
 
 // console.log(measureKelvin());
+// How JavaScript works behind the scenes
+
+// An High Level Overview of JavaScript
+
+/**
+ * JavaScript is a high-level prototype based object oriented programming language,
+ * interpreted, multi paradigm, dynamic, single threaded programming language
+
+* High Level = The term high level means that we need not to tell the computer to
+create memory in the hardware, it is done automatically by the high-level languages
+the downside of this is that the code will be comparatively less faster than the low-level
+languages such as C.
+
+*Garbage Collection = it is an algorithm in the JavaScript engine that cleans the unused
+objects which takes up the memory in the system, it is done by the engine itself and not 
+manually
+
+*Interpreted = The code written is converted into Byte code in time of the execution by the
+JavaScript engine and run, it is not compiled and converted into Byte code before execution like Java
+
+*Multi Paradigm = A paradigm means an approach of structuring the code, which will direct 
+the coding style and technique
+
+The paradigm is of three types:
+1: Procedural programming
+2: Object oriented programming
+3: Functional programming
+
+and JavaScript allows all the types of the above paradigm techniques to implement
+
+*First-Class functions = the functions are treated as variables, we can pass it into 
+another functions and return them from functions
+
+with the help of this we can use it in functional programming
+
+*Dynamic = there is no need to declare the data type when declaring a variable
+it can be just declared using the keywords let and const
+
+
+*Concurrency Model = how JavaScript engine handles multiple tasks happening at the same time
+since JavaScript is Single threaded, it can do only one task at a time, hence comes the concept
+non-blocking event loop
+*/
+
+/**
+ * JavaScript Engine = it is a program that executes JavaScript code
+ * the engine consists of a Call stack and a heap
+ * the call stack has our code, where the execution needs to happen, and in the heap
+ * there are unorganized objects in the memory where our objects are stored
+ *
+ */
+
+// this keyword
+console.log(this); // this is the global object
+
+/**
+ * JavaScript Engine = it is a program that executes JavaScript code
+ * the engine consists of a Call stack and a heap
+ * the call stack has our code, where the execution needs to happen, and in the heap
+ * there are unorganized objects in the memory where our objects are stored
+ *
+ */
+
+const getStats = arr => {
+  const max = Math.max(...arr);
+  const min = Math.min(...arr);
+  const sum = arr.reduce((sum, r) => sum + r);
+  const avg = sum / arr.length;
+
+  // return {
+  //   max: max,
+  //   min: min,
+  //   sum: sum,
+  //   avg: avg,
+  // };
+
+  // Short Hand Properties, with the help of this we can easily write as
+  return {
+    max,
+    min,
+    sum,
+    avg,
+  };
+};
+
+const reviews = [4.5, 5.2, 1.7, 4.5, 2.4, 1.1];
+
+const stats = getStats(reviews);
+console.log(stats);
+
+const role = 'Batsman';
+const person = 'Virat Kohli';
+const role1 = 'Bowler';
+const person1 = 'Ashwin';
+
+const team = {};
+team[role] = person;
+team[role1] = person1;
+console.log(team);
+
+// computed Properties -- ES6 syntax
+
+const team2 = {
+  [role]: person,
+  [role1]: person1,
+};
+
+console.log(team2);
+
+// Example
+
+// const addProp = (obj, k, v) => {
+//   const copy = { ...obj };
+//   copy[k] = v;
+//   return copy;
+// };
+
+const addProp = (obj, k, v) => {
+  return {
+    ...obj,
+    [k]: v,
+  };
+};
+const copiedElements = addProp(team2, 'Jadeja', ':😒');
+
+// Adding Methods to objects
+// some inbuilt methods are Math.something
+const operations = {
+  numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+  add: function (x, y) {
+    return x + y;
+  },
+  subtract: function (x, y) {
+    return x - y;
+  },
+};
+console.log(operations.add(43, 4));
+
+// short hand function for adding methods in objects, ES6 syntax
+
+const calculator = {
+  numbers: [1, 2, 3, 4, 5, 6, 7, 8],
+  add(x, y) {
+    return x + y;
+  },
+  sub(x, y) {
+    return x - y;
+  },
+  multiply(x, y) {
+    return x * y;
+  },
+  divide(x, y) {
+    return x / y;
+  },
+};
+
+// this keyword
+
+console.log(this); // the global scope which is the windows
+
+// using this in methods
+
+// const guy1 = {
+//   first: 'Sanjith',
+//   last: 'Kumar',
+//   nickName: 'Sanju',
+//   fullName() {
+//     console.log(
+//       `${this.first} ${this.last} and his nick name is ${this.nickName}`
+//     );
+//   },
+// };
+// console.log(guy1.fullName());
+
+// the same with the help of computed properties
+
+const singer = {
+  first: 'Harry',
+  last: 'Styles',
+  nickName: 'Harry',
+  fullName() {
+    const { first, last, nickName } = this;
+    return `${first} ${last} AKA ${nickName}`;
+  },
+  printBio() {
+    console.log(this);
+    // calling the method which is in the same object, using this
+    const fullName = this.fullName(); // this calls the fullName method
+    console.log(`${fullName} is a Great Singer`);
+  },
+  // arrow functions don't get their own this
+  laugh: () => {
+    console.log(this);
+    console.log(`${this.nickName} says HAHA`);
+  },
+};
+// singer.nickName = 'HARRRRYYY!'; we can change the value of the key pairs
+
+// the value of this depends on the invocation context of the function used in
+// which we means it depends on how we execute the function
+
+const printBio = singer.printBio;
