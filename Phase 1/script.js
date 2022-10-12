@@ -34,13 +34,13 @@ let major2 = 'Computer Science';
 
 /**
  * Rules to follow while naming a let
-iable
+ iable
  * the let
-iable is recommended to be declared using camelCase
+ iable is recommended to be declared using camelCase
  * the let
-iables should'nt start using numbers, special characters except $ ,_
+ iables should'nt start using numbers, special characters except $ ,_
  * you cannot declare a let
-iable with a reserved keywords
+ iable with a reserved keywords
  * example : const const = "Hello" --> invalid
  */
 
@@ -69,9 +69,9 @@ console.log(continent);
 /**
  * JavaScript has dynamic typing, which means that we do not have to manually define the data type
  * of the value stored in a let
-iable, JavaScript automatically determines the data type
+ iable, JavaScript automatically determines the data type
  * the value has the type not the let
-iable we declare
+ iable we declare
  * the below code is an example
  */
 
@@ -447,12 +447,12 @@ if (passTest) hasDriversLicense1 = true;
 if (hasDriversLicense1) console.log('You can Drive');
 
 /**
-    const extend = "Drive";
-    const private = 67;
-    const public = 33;
- * These are reserved keywords which might be used in upcoming versions 
-    hence not recommended to use, 
- */
+         const extend = "Drive";
+         const private = 67;
+         const public = 33;
+         * These are reserved keywords which might be used in upcoming versions 
+         hence not recommended to use, 
+         */
 
 // Functions
 
@@ -894,11 +894,11 @@ for (const people in objInArray) {
 
 /**
  *Both for...in and for...of statements iterate over something. The main difference between 
-  them is in what they iterate over.
-  The for...in statement iterates over the enumerable string properties of an object,
-  while the for...of statement iterates over values that the iterable object defines to
-  be iterated over.
-*/
+ them is in what they iterate over.
+ The for...in statement iterates over the enumerable string properties of an object,
+ while the for...of statement iterates over values that the iterable object defines to
+ be iterated over.
+ */
 
 // While Loops
 
@@ -938,8 +938,8 @@ console.log(text);
 
 /**
  *The do...while statement creates a loop that executes a specified statement until 
-  the test condition evaluates to false. The condition is evaluated after executing the 
-  statement, resulting in the specified statement executing at least once.
+ the test condition evaluates to false. The condition is evaluated after executing the 
+ statement, resulting in the specified statement executing at least once.
  */
 
 let ex = 0;
@@ -984,42 +984,42 @@ const measureKelvin = function () {
 /**
  * JavaScript is a high-level prototype based object oriented programming language,
  * interpreted, multi paradigm, dynamic, single threaded programming language
-
-* High Level = The term high level means that we need not to tell the computer to
-create memory in the hardware, it is done automatically by the high-level languages
-the downside of this is that the code will be comparatively less faster than the low-level
-languages such as C.
-
-*Garbage Collection = it is an algorithm in the JavaScript engine that cleans the unused
-objects which takes up the memory in the system, it is done by the engine itself and not 
-manually
-
-*Interpreted = The code written is converted into Byte code in time of the execution by the
-JavaScript engine and run, it is not compiled and converted into Byte code before execution like Java
-
-*Multi Paradigm = A paradigm means an approach of structuring the code, which will direct 
-the coding style and technique
-
-The paradigm is of three types:
-1: Procedural programming
-2: Object oriented programming
-3: Functional programming
-
-and JavaScript allows all the types of the above paradigm techniques to implement
-
-*First-Class functions = the functions are treated as variables, we can pass it into 
-another functions and return them from functions
-
-with the help of this we can use it in functional programming
-
-*Dynamic = there is no need to declare the data type when declaring a variable
-it can be just declared using the keywords let and const
-
-
-*Concurrency Model = how JavaScript engine handles multiple tasks happening at the same time
-since JavaScript is Single threaded, it can do only one task at a time, hence comes the concept
-non-blocking event loop
-*/
+ 
+ * High Level = The term high level means that we need not to tell the computer to
+ create memory in the hardware, it is done automatically by the high-level languages
+ the downside of this is that the code will be comparatively less faster than the low-level
+ languages such as C.
+ 
+ *Garbage Collection = it is an algorithm in the JavaScript engine that cleans the unused
+ objects which takes up the memory in the system, it is done by the engine itself and not 
+ manually
+ 
+ *Interpreted = The code written is converted into Byte code in time of the execution by the
+ JavaScript engine and run, it is not compiled and converted into Byte code before execution like Java
+ 
+ *Multi Paradigm = A paradigm means an approach of structuring the code, which will direct 
+ the coding style and technique
+ 
+ The paradigm is of three types:
+ 1: Procedural programming
+ 2: Object oriented programming
+ 3: Functional programming
+ 
+ and JavaScript allows all the types of the above paradigm techniques to implement
+ 
+ *First-Class functions = the functions are treated as variables, we can pass it into 
+ another functions and return them from functions
+ 
+ with the help of this we can use it in functional programming
+ 
+ *Dynamic = there is no need to declare the data type when declaring a variable
+ it can be just declared using the keywords let and const
+ 
+ 
+ *Concurrency Model = how JavaScript engine handles multiple tasks happening at the same time
+ since JavaScript is Single threaded, it can do only one task at a time, hence comes the concept
+ non-blocking event loop
+ */
 
 /**
  * JavaScript Engine = it is a program that executes JavaScript code
@@ -1270,3 +1270,379 @@ myDeck.initializeDeck();
 myDeck.shuffle();
 const h1 = myDeck.drawMultipleCards(3);
 const h2 = myDeck.drawMultipleCards(3);
+
+// Async JS, promises & requests
+
+/**
+ * CALL STACK
+ * the mechanism of the JS interpreter uses to keep track of its place in a
+ * script which calls multiple functions
+ * last thing in first thing out (LIFO) = how a stack works
+ */
+
+/**
+ * multiplyNum
+ * square
+ * isRightTriangle()
+ * when the above two functions are computed the value gets stored in the isRightTriangle function
+ * which is using the above function, which need to be called
+ */
+
+const multiplyNum = (x, y) => x * y;
+// this square function calls the multiply function
+const square = x => multiplyNum(x, x);
+
+// this function here calls the function square
+const isRightTriangle = (a, b, c) => {
+  return square(a) + square(b) === square(c);
+};
+
+console.log(isRightTriangle(3, 4, 5));
+
+const repeat = (str, times) => {
+  let result = '';
+  for (let i = 0; i < times; i++) {
+    result += str;
+  }
+  return result;
+};
+const scream = str => {
+  return str.toUpperCase() + '!!!!!';
+};
+
+const getSomeText = phrase => {
+  let text = scream(phrase);
+  let some = repeat(text, 3);
+  return some;
+};
+
+// const makeSome = (phrase, el) => {
+//   const h1 = document.createElement('h1');
+//   h1.innerText = getSomeText(phrase);
+//   el.appendChild(h1);
+// };
+
+// makeSome('I LOVE PIZZA', document.body);
+
+// JS IS SINGLE THREADED -- does things one at a time
+
+// // it cannot run all the three console.log() at the same time
+// console.log('I HAPPENED FIRST!'); // this runs first
+
+// // since this has a timeout for 3 seconds the rest of the code runs then after completion of
+// // 3 seconds this below function runs
+
+// // the browser does all the below  work
+// setTimeout(function () {
+//   console.log('I HAPPENED THIRD!');
+// }, 3000);
+// // alert('WELL, I HAPPENED SECOND :)');  then this runs
+
+// console.log('I HAPPENED SECOND!'); // then this
+
+// // How Asynchronous Callbacks work
+
+// /**
+//  * the Asynchronous JS works in such a way that whenever we have a timer or a callback function
+//  * the code or the function is set on pause, rest other things gets executed and then when the timer
+//  * runs out, the callback function is executed,
+//  * the browser handles all the work, during that waiting time, which JavaScript is not responsible
+//  * at the point, when it is waiting
+//  * c++ in the browser runs the callback
+//  */
+// console.log('HEY THERE!'); // this gets executed first
+// // now this is passed on to the browser which handles this function
+// // it is passed on to the web API, which handles it until the timer runs out and then
+// // it is added back to the callback queue which will eventually run after the time is completed
+
+// setTimeout(() => {
+//   console.log('DANGGGGGGGG!!!!');
+// }, 7000);
+
+// // the same goes to the browser here as well
+// // it is passed on to the web API, which handles it until the timer runs out and then
+// // it is added back to the callback queue which will eventually run after the time is completed
+
+// setTimeout(() => {
+//   console.log('EWWWWW!!');
+// }, 3000);
+
+// console.log('BYE!!');
+
+// CALL BACK
+
+// const btn = document.querySelector('button');
+// setTimeout(() => {
+//   btn.style.transform = `translateX(100px)`;
+//   setTimeout(() => {
+//     btn.style.transform = `translateX(200px)`;
+//     setTimeout(() => {
+//       btn.style.transform = `translateX(300px)`;
+//       setTimeout(() => {
+//         btn.style.transform = `translateX(400px)`;
+//         setTimeout(() => {
+//           btn.style.transform = `translateX(500px)`;
+//         }, 1000);
+//       }, 1000);
+//     }, 1000);
+//   }, 1000);
+// }, 1000);
+const btn = document.querySelector('button');
+const moveX = (element, amount, delay, onSuccess, onFailure) => {
+  onFailure();
+  setTimeout(() => {
+    const bodyBoundary = document.body.clientWidth;
+    const currLeft = element.getBoundingClientRect().left;
+    const elRight = element.getBoundingClientRect().right;
+    if (elRight + amount > bodyBoundary) {
+    } else {
+      element.style.transform = `translateX(${amount}px)`;
+      onSuccess();
+    }
+  }, delay);
+};
+
+// the arrow functions are the call back functions
+// moveX(btn, 100, 1000, () => {
+//   moveX(btn, 200, 1000, () => {
+//     moveX(btn, 300, 1000, () => {
+//       moveX(btn, 400, 1000, () => {
+//         moveX(btn, 1000, 1000);
+//        });
+//     });
+//   });
+// });
+
+// NESTING CALLBACKS IS DIFFICULT TO READ!
+moveX(
+  btn,
+  300,
+  1000,
+  () => {
+    //success callback
+    moveX(
+      btn,
+      300,
+      1000,
+      () => {
+        //success callback
+        moveX(
+          btn,
+          300,
+          1000,
+          () => {
+            //success callback
+            moveX(
+              btn,
+              300,
+              1000,
+              () => {
+                //success callback
+                moveX(
+                  btn,
+                  300,
+                  1000,
+                  () => {
+                    //success callback
+                    // alert('YOU HAVE A WIDE SCREEN!');
+                  },
+                  () => {
+                    //failure callback
+                    // alert('CANNOT MOVE FURTHER!');
+                  }
+                );
+              },
+              () => {
+                //failure callback
+                // alert('CANNOT MOVE FURTHER!');
+              }
+            );
+          },
+          () => {
+            //failure callback
+            // alert('CANNOT MOVE FURTHER!');
+          }
+        );
+      },
+      () => {
+        //failure callback
+        // alert('CANNOT MOVE FURTHER!');
+      }
+    );
+  },
+  () => {
+    //failure callback
+    // alert('CANNOT MOVE FURTHER!');
+  }
+);
+
+// Promises
+// An object which represents the completion or failure of asynchronous operations
+
+// const willGetABike = new Promise((resolve, reject) => {
+//   const rand = Math.random();
+//   if (rand < 0.5) {
+//     resolve();
+//   } else {
+//     reject();
+//   }
+// });
+
+// // then -- this runs when the promise is resolved
+// willGetABike.then(() => {
+//   console.log('YAY, WE GOT THE BIKE!');
+// });
+
+// // catch -- this runs when the promise is rejected
+
+// willGetABike.catch(() => {
+//   console.log('SORRY, THE BIKE CAN WAIT!');
+// });
+
+// A promise can return a Promise
+const makeBikePromise = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const rand = Math.random();
+      if (rand < 0.5) {
+        resolve();
+      } else {
+        reject();
+      }
+    }, 5000);
+  });
+};
+makeBikePromise()
+  .then(() => {
+    console.log('GOT A BIKE!');
+  })
+  .catch(() => {
+    console.log('NO BIKE!');
+  });
+
+// const fakeRequest = url => {
+//   return new Promise((resolve, reject) => {
+//     const pages = {
+//       '/users': [
+//         {
+//           id: 1,
+//           name: 'ZUCK',
+//         },
+//         {
+//           id: 2,
+//           name: 'GATES',
+//         },
+//       ],
+//       '/users/1': {
+//         id: 1,
+//         name: 'ZUCKERBURG',
+//         likes: 300,
+//         comments: 45,
+//       },
+//       '/users/2': {
+//         id: 2,
+//         name: 'GATES',
+//         likes: 30760,
+//         comments: 4532,
+//       },
+//       '/users/3': {
+//         id: 3,
+//         name: 'MUSK',
+//         likes: 308940234,
+//         comments: 4532423,
+//       },
+//     };
+//     const data = pages[url];
+//     if (data) {
+//       resolve({ status: 200, data });
+//     } else {
+//       reject({ status: 404 });
+//     }
+//   });
+// };
+
+// fakeRequest('/users')
+//   .then(res => {
+//     console.log('Status Code', res.status);
+//     console.log('Data', res.data);
+//     console.log('CONNECTED');
+//   })
+//   .catch(res => {
+//     console.log('Status Code', res.status);
+//     console.log('NOT CONNECTED');
+//   });
+
+const fakeRequest = url => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const pages = {
+        '/users': [
+          { id: 1, username: 'Bilbo' },
+          { id: 5, username: 'Esmerelda' },
+        ],
+        '/users/1': {
+          id: 1,
+          username: 'Bilbo',
+          upvotes: 360,
+          city: 'Lisbon',
+          topPostId: 454321,
+        },
+        '/users/5': {
+          id: 5,
+          username: 'Esmerelda',
+          upvotes: 571,
+          city: 'Honolulu',
+        },
+        '/posts/454321': {
+          id: 454321,
+          title: 'Ladies & Gentlemen, may I introduce my pet pig, Hamlet',
+        },
+        '/about': 'This is the about page!',
+      };
+      const data = pages[url];
+      if (data) {
+        resolve({ status: 200, data }); //resolve with a value!
+      } else {
+        reject({ status: 404 }); //reject with a value!
+      }
+    }, 1000);
+  });
+};
+
+// fakeRequest('/users').then(res => {
+//   console.log(res.data);
+// });
+
+// fakeRequest('/users')
+//   .then(res => {
+//     const id = res.data[0].id;
+//     fakeRequest(`/users/${id}`).then(res => {
+//       const postId = res.data.topPostId;
+//       fakeRequest(`/posts/${postId}`).then(res => {
+//         console.log(res);
+//       });
+//     });
+//   })
+//   .catch(res => {
+//     console.log(res.status);
+//   });
+
+// chaining the promises
+
+fakeRequest('/users')
+  .then(res => {
+    console.log(res);
+    const id = res.data[0].id;
+    return fakeRequest(`/users/${id}`);
+  })
+  .then(res => {
+    console.log(res);
+    const postId = res.data.topPostId;
+    return fakeRequest(`/posts/${postId}`);
+  })
+  .then(res => {
+    console.log(res);
+  })
+  .catch(res => {
+    console.log(res.status);
+  });
