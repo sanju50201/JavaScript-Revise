@@ -1387,20 +1387,20 @@ const getSomeText = phrase => {
 //     }, 1000);
 //   }, 1000);
 // }, 1000);
-const btn = document.querySelector('button');
-const moveX = (element, amount, delay, onSuccess, onFailure) => {
-  onFailure();
-  setTimeout(() => {
-    const bodyBoundary = document.body.clientWidth;
-    const currLeft = element.getBoundingClientRect().left;
-    const elRight = element.getBoundingClientRect().right;
-    if (elRight + amount > bodyBoundary) {
-    } else {
-      element.style.transform = `translateX(${amount}px)`;
-      onSuccess();
-    }
-  }, delay);
-};
+// const btn = document.querySelector('button');
+// const moveX = (element, amount, delay, onSuccess, onFailure) => {
+//   onFailure();
+//   setTimeout(() => {
+//     const bodyBoundary = document.body.clientWidth;
+//     const currLeft = element.getBoundingClientRect().left;
+//     const elRight = element.getBoundingClientRect().right;
+//     if (elRight + amount > bodyBoundary) {
+//     } else {
+//       element.style.transform = `translateX(${amount}px)`;
+//       onSuccess();
+//     }
+//   }, delay);
+// };
 
 // the arrow functions are the call back functions
 // moveX(btn, 100, 1000, () => {
@@ -1414,67 +1414,67 @@ const moveX = (element, amount, delay, onSuccess, onFailure) => {
 // });
 
 // NESTING CALLBACKS IS DIFFICULT TO READ!
-moveX(
-  btn,
-  300,
-  1000,
-  () => {
-    //success callback
-    moveX(
-      btn,
-      300,
-      1000,
-      () => {
-        //success callback
-        moveX(
-          btn,
-          300,
-          1000,
-          () => {
-            //success callback
-            moveX(
-              btn,
-              300,
-              1000,
-              () => {
-                //success callback
-                moveX(
-                  btn,
-                  300,
-                  1000,
-                  () => {
-                    //success callback
-                    // alert('YOU HAVE A WIDE SCREEN!');
-                  },
-                  () => {
-                    //failure callback
-                    // alert('CANNOT MOVE FURTHER!');
-                  }
-                );
-              },
-              () => {
-                //failure callback
-                // alert('CANNOT MOVE FURTHER!');
-              }
-            );
-          },
-          () => {
-            //failure callback
-            // alert('CANNOT MOVE FURTHER!');
-          }
-        );
-      },
-      () => {
-        //failure callback
-        // alert('CANNOT MOVE FURTHER!');
-      }
-    );
-  },
-  () => {
-    //failure callback
-    // alert('CANNOT MOVE FURTHER!');
-  }
-);
+// moveX(
+//   btn,
+//   300,
+//   1000,
+//   () => {
+//     //success callback
+//     moveX(
+//       btn,
+//       300,
+//       1000,
+//       () => {
+//         //success callback
+//         moveX(
+//           btn,
+//           300,
+//           1000,
+//           () => {
+//             //success callback
+//             moveX(
+//               btn,
+//               300,
+//               1000,
+//               () => {
+//                 //success callback
+//                 moveX(
+//                   btn,
+//                   300,
+//                   1000,
+//                   () => {
+//                     //success callback
+//                     // alert('YOU HAVE A WIDE SCREEN!');
+//                   },
+//                   () => {
+//                     //failure callback
+//                     // alert('CANNOT MOVE FURTHER!');
+//                   }
+//                 );
+//               },
+//               () => {
+//                 //failure callback
+//                 // alert('CANNOT MOVE FURTHER!');
+//               }
+//             );
+//           },
+//           () => {
+//             //failure callback
+//             // alert('CANNOT MOVE FURTHER!');
+//           }
+//         );
+//       },
+//       () => {
+//         //failure callback
+//         // alert('CANNOT MOVE FURTHER!');
+//       }
+//     );
+//   },
+//   () => {
+//     //failure callback
+//     // alert('CANNOT MOVE FURTHER!');
+//   }
+// );
 
 // Promises
 // An object which represents the completion or failure of asynchronous operations
@@ -1645,4 +1645,32 @@ fakeRequest('/users')
   })
   .catch(res => {
     console.log(res.status);
+  });
+
+const btn = document.querySelector('button');
+const moveX = (element, amount, delay) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const bodyBoundary = document.body.clientWidth;
+      const elRight = element.getBoundingClientRect().right;
+      const currLeft = element.getBoundingClientRect().left;
+      if (elRight + amount > bodyBoundary) {
+        reject({ bodyBoundary, elRight, amount });
+      } else {
+        element.style.transform = `translateX(${amount}px)`;
+        resolve();
+      }
+    }, delay);
+  });
+};
+
+moveX(btn, 300, 1000)
+  .then(() => moveX(btn, 300, 1000))
+  .then(() => moveX(btn, 300, 1000))
+  .then(() => moveX(btn, 300, 1000))
+  .then(() => moveX(btn, 300, 1000))
+  .then(() => moveX(btn, 300, 1000))
+  .catch(({ bodyBoundary, amount, elRight }) => {
+    console.log(`Body is ${bodyBoundary}px`);
+    console.log(`Element is at ${elRight}px, ${amount} is large!`);
   });
