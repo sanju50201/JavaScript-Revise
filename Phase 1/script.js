@@ -1674,3 +1674,121 @@ moveX(btn, 300, 1000)
     console.log(`Body is ${bodyBoundary}px`);
     console.log(`Element is at ${elRight}px, ${amount} is large!`);
   });
+
+// Requests
+
+// AJAX - Asynchronous JavaScript and XML(JSON)
+
+// function reqListener() {
+//   console.log(this.responseText);
+// }
+
+// let oReq = new XMLHttpRequest();
+// oReq.addEventListener('load', reqListener);
+// oReq.open('GET', 'http://localhost');
+// oReq.send();
+
+// create a new request
+// Basic XMLHttpRequest
+// const firstRequest = new XMLHttpRequest();
+// // send that request if it works
+// firstRequest.addEventListener('load', function () {
+//   console.log('IT WORKS!');
+//   // the output we received is JSON, in order to convert that to
+//   // JavaScript we use JSON.parse
+//   const parsedJSON = JSON.parse(this.responseText);
+//   for (let planet of parsedJSON.results) {
+//     console.log(planet.name);
+//   }
+// });
+
+// // send a request if it doesn't work
+// firstRequest.addEventListener('error', () => {
+//   console.log('ERROR!');
+// });
+
+// // open the request created
+// firstRequest.open('GET', 'https://swapi.dev/api/planets/');
+// firstRequest.send(); // send the request
+// console.log('REQUEST SUCCESSFUL');
+
+// Chained XMLHttpRequest
+// const firstRequest = new XMLHttpRequest();
+// // send that request if it works
+// firstRequest.addEventListener('load', function () {
+//   console.log('IT WORKS!');
+//   // the output we received is JSON, in order to convert that to
+//   // JavaScript we use JSON.parse
+//   const parsedJSON = JSON.parse(this.responseText);
+//   const filmURL = parsedJSON.results[0].films[0];
+//   const filmReq = new XMLHttpRequest();
+//   filmReq.addEventListener('load', function () {
+//     console.log('WORKS AGAIN');
+//     const filmData = JSON.parse(this.responseText);
+//     console.log(filmData);
+//   });
+//   filmReq.addEventListener('error', function (e) {
+//     console.log('ERROR!', e);
+//   });
+//   filmReq.open('GET', filmURL);
+//   filmReq.send();
+//   console.log('FILM REQUEST SUCCESSFUL');
+// });
+// // send a request if it doesn't work
+// firstRequest.addEventListener('error', () => {
+//   console.log('ERROR!');
+// });
+
+// // open the request created
+// firstRequest.open('GET', 'https://swapi.dev/api/planets/');
+// firstRequest.send(); // send the request
+// console.log('REQUEST SUCCESSFUL');
+
+// Fetch
+// same above code but written in fetch
+
+// fetch('https://swapi.dev/api/planets/')
+//   .then(response => {
+//     if (!response.ok) {
+//       throw new Error(`Status Code Error: ${response.status}`);
+//     } else {
+//       response.json().then(data => {
+//         // console.log(data);
+//         for (let planet of data.results) {
+//           console.log(planet);
+//         }
+//       });
+//     }
+//   })
+//   // the catch in fetch only works when there is a server error/problem with the network
+//   .catch(err => {
+//     console.log('SOMETHING WENT WRONG!', err);
+//   });
+
+// chaining in fetch
+
+fetch('https://swapi.dev/api/planets/')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`Status Code Error: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log(data);
+    const fetchFilmURL = data.results[0].films[0];
+    return fetch(fetchFilmURL);
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`Status Code Error: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log(data);
+  })
+  // the catch in fetch only works when there is a server error/problem with the network
+  .catch(err => {
+    console.log('SOMETHING WENT WRONG!', err);
+  });
