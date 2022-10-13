@@ -1647,33 +1647,33 @@ fakeRequest('/users')
     console.log(res.status);
   });
 
-const btn = document.querySelector('button');
-const moveX = (element, amount, delay) => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const bodyBoundary = document.body.clientWidth;
-      const elRight = element.getBoundingClientRect().right;
-      const currLeft = element.getBoundingClientRect().left;
-      if (elRight + amount > bodyBoundary) {
-        reject({ bodyBoundary, elRight, amount });
-      } else {
-        element.style.transform = `translateX(${amount}px)`;
-        resolve();
-      }
-    }, delay);
-  });
-};
+// const btn = document.querySelector('button');
+// const moveX = (element, amount, delay) => {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       const bodyBoundary = document.body.clientWidth;
+//       const elRight = element.getBoundingClientRect().right;
+//       const currLeft = element.getBoundingClientRect().left;
+//       if (elRight + amount > bodyBoundary) {
+//         reject({ bodyBoundary, elRight, amount });
+//       } else {
+//         element.style.transform = `translateX(${amount}px)`;
+//         resolve();
+//       }
+//     }, delay);
+//   });
+// };
 
-moveX(btn, 300, 1000)
-  .then(() => moveX(btn, 300, 1000))
-  .then(() => moveX(btn, 300, 1000))
-  .then(() => moveX(btn, 300, 1000))
-  .then(() => moveX(btn, 300, 1000))
-  .then(() => moveX(btn, 300, 1000))
-  .catch(({ bodyBoundary, amount, elRight }) => {
-    console.log(`Body is ${bodyBoundary}px`);
-    console.log(`Element is at ${elRight}px, ${amount} is large!`);
-  });
+// moveX(btn, 300, 1000)
+//   .then(() => moveX(btn, 300, 1000))
+//   .then(() => moveX(btn, 300, 1000))
+//   .then(() => moveX(btn, 300, 1000))
+//   .then(() => moveX(btn, 300, 1000))
+//   .then(() => moveX(btn, 300, 1000))
+//   .catch(({ bodyBoundary, amount, elRight }) => {
+//     console.log(`Body is ${bodyBoundary}px`);
+//     console.log(`Element is at ${elRight}px, ${amount} is large!`);
+//   });
 
 // Requests
 
@@ -1767,28 +1767,237 @@ moveX(btn, 300, 1000)
 
 // chaining in fetch
 
-fetch('https://swapi.dev/api/planets/')
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(`Status Code Error: ${response.status}`);
-    }
-    return response.json();
+// fetch('https://swapi.dev/api/planets/')
+//   .then(response => {
+//     if (!response.ok) {
+//       throw new Error(`Status Code Error: ${response.status}`);
+//     }
+//     return response.json();
+//   })
+//   .then(data => {
+//     console.log('FETCHED THE 10 PLANETS');
+//     const fetchFilmURL = data.results[1].films[1];
+//     return fetch(fetchFilmURL);
+//   })
+//   .then(response => {
+//     if (!response.ok) {
+//       throw new Error(`Status Code Error: ${response.status}`);
+//     }
+//     return response.json();
+//   })
+//   .then(data => {
+//     console.log('FETCHED FILMS BASED OF THE 10 PLANETS');
+//     console.log(data.title);
+//   })
+//   // the catch in fetch only works when there is a server error/problem with the network
+//   .catch(err => {
+//     console.log('SOMETHING WENT WRONG!', err);
+//   });
+
+// Refactoring the above code
+// easy to read simple code
+// const checkStatusAndPhrase = response => {
+//   if (!response.ok) {
+//     throw new Error(`Status Code Error: ${response.status}`);
+//   }
+//   return response.json();
+// };
+
+// const printPlanets = data => {
+//   console.log('ADDED 10 MORE PLANETS');
+//   for (let planet of data.results) {
+//     console.log(planet.name);
+//   }
+//   return Promise.resolve(data.next);
+// };
+
+// const fetchNextPlanets = (url = 'https://swapi.dev/api/planets/') => {
+//   return fetch(url);
+// };
+// fetchNextPlanets()
+//   .then(checkStatusAndPhrase)
+//   .then(printPlanets)
+//   .then(fetchNextPlanets)
+//   .then(checkStatusAndPhrase)
+//   .then(printPlanets)
+//   // the catch in fetch only works when there is a server error/problem with the network
+//   .catch(err => {
+//     console.log('SOMETHING WENT WRONG!', err);
+//   });
+
+// Axios
+// there is not need to parse the code manually
+// first we need to reference the external script in HTML
+// axios
+//   .get('https://swapi.dev/api/planets/')
+//   .then(res => {
+//     console.log(res.data);
+//   })
+//   // if the status code != 200 run catch
+//   .catch(err => {
+//     console.log('SOMETHING WENT WRONG IN CATCH CALLBACK!', err);
+//   });
+
+// Sequential Axios Requests(chained)
+// const fetchNextPlanets = (url = 'https://swapi.dev/api/planets/') => {
+//   return axios.get(url);
+// };
+
+// const printPlanets = ({ data }) => {
+//   console.log(data);
+//   for (let planet of data.results) {
+//     console.log(planet.name);
+//   }
+//   return Promise.resolve(data.next);
+// };
+// fetchNextPlanets()
+//   .then(printPlanets)
+//   .then(fetchNextPlanets)
+//   .then(printPlanets)
+//   .catch(err => {
+//     console.log('SOMETHING WENT WRONG IN CATCH CALLBACK!', err);
+//   });
+
+// Async Functions
+// async keyword
+async function greet() {
+  return 'HEY!';
+}
+greet().then(val => {
+  console.log('PROMISE RESOLVED WITH: ', val);
+});
+
+async function add(x, y) {
+  if (typeof x !== 'number' || typeof y !== 'number') {
+    throw 'X and Y must be numbers';
+  }
+  return x + y;
+}
+
+add(2, 3)
+  .then(val => {
+    console.log('PROMISE RESOLVED WITH: ', val);
   })
-  .then(data => {
-    console.log(data);
-    const fetchFilmURL = data.results[0].films[0];
-    return fetch(fetchFilmURL);
-  })
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(`Status Code Error: ${response.status}`);
-    }
-    return response.json();
-  })
-  .then(data => {
-    console.log(data);
-  })
-  // the catch in fetch only works when there is a server error/problem with the network
   .catch(err => {
-    console.log('SOMETHING WENT WRONG!', err);
+    console.log('PROMISE REJECTED WITH: ', err);
   });
+
+// await keyword
+// in order to await to work, we need to pass in an async function
+// async function getPlanets() {
+//   const awaitedRes = await axios.get('https://swapi.dev/api/plrtgfanets/');
+//   console.log(awaitedRes.data);
+// }
+// then keyword was not necessary
+
+// getPlanets().catch(err => {
+//   console.log('CAUGHT', err);
+// });
+
+// error handling in async function
+// using try catch block
+async function getPlanets() {
+  try {
+    const awaitedRes = await axios.get('https://swapi.dev/api/planets/');
+    console.log(awaitedRes.data);
+  } catch (e) {
+    console.log('CAUGHT', e);
+  }
+}
+getPlanets();
+
+// moving button function using async function
+const btn = document.querySelector('button');
+const moveX = (element, amount, delay) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const bodyBoundary = document.body.clientWidth;
+      const elRight = element.getBoundingClientRect().right;
+      const currLeft = element.getBoundingClientRect().left;
+      if (elRight + amount > bodyBoundary) {
+        reject({ bodyBoundary, elRight, amount });
+      } else {
+        element.style.transform = `translateX(${currLeft + amount}px)`;
+        resolve();
+      }
+    }, delay);
+  });
+};
+
+// Sequential requests
+// async function get3Pokemon() {
+//   const poke1 = await axios.get('https://pokeapi.co/api/v2/pokemon/1');
+//   const poke2 = await axios.get('https://pokeapi.co/api/v2/pokemon/2');
+//   const poke3 = await axios.get('https://pokeapi.co/api/v2/pokemon/3');
+//   console.log(poke1.data);
+//   console.log(poke2.data);
+//   console.log(poke3.data);
+// }
+
+// Parallel Requests
+
+// async function getPokemon() {
+//   const prom1 = axios.get('https://pokeapi.co/api/v2/pokemon/1');
+//   const prom2 = axios.get('https://pokeapi.co/api/v2/pokemon/2');
+//   const prom3 = axios.get('https://pokeapi.co/api/v2/pokemon/3');
+//   console.log(prom1); // pending promise
+//   const poke1 = await prom1;
+//   const poke2 = await prom2;
+//   const poke3 = await prom3;
+//   console.log(prom1); // complete promise
+//   console.log(poke1.data);
+//   console.log(poke2.data);
+//   console.log(poke3.data);
+// }
+// getPokemon();
+
+function changeBodyColor(color, delay) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      document.body.style.backgroundColor = color;
+      resolve();
+    }, delay);
+  });
+}
+// this is sequential
+// async function lightShow() {
+//   await changeBodyColor('teal ', 1000);
+//   await changeBodyColor('red ', 1000);
+//   await changeBodyColor('black ', 1000);
+//   await changeBodyColor('orange', 1000);
+// }
+// lightShow();
+
+// parallel requests
+
+async function lightShow() {
+  const p1 = changeBodyColor('teal', 1000);
+  const p2 = changeBodyColor('orange', 1000);
+  const p3 = changeBodyColor('gray', 1000);
+  const p4 = changeBodyColor('violet', 1000);
+  const p5 = changeBodyColor('teal', 1000);
+  await p1;
+  await p2;
+  await p3;
+  await p4;
+  await p5;
+}
+
+lightShow();
+
+//  the pokemon api using Promise.all
+
+async function getPokemon() {
+  const prom1 = axios.get('https://pokeapi.co/api/v2/pokemon/1');
+  const prom2 = axios.get('https://pokeapi.co/api/v2/pokemon/2');
+  const prom3 = axios.get('https://pokeapi.co/api/v2/pokemon/3');
+  const results = await Promise.all([prom1, prom2, prom3]); // to select all the promises
+  printPokemon(results);
+
+  function printPokemon(results) {
+    for (let pokemon of results) {
+      console.log(pokemon.data.name);
+    }
+  }
+}
+getPokemon();
